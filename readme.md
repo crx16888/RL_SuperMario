@@ -1,2 +1,9 @@
-参考教程：【【保姆手撸代码】强化学习超级马里奥（stablebaseline3框架gym游戏包）】 https://www.bilibili.com/video/BV1CERYY3EjA/?p=20&share_source=copy_web&vd_source=1717a2b8baae523e9b5c9eb85a896dd3
+1. 参考教程：【【保姆手撸代码】强化学习超级马里奥（stablebaseline3框架gym游戏包）】 https://www.bilibili.com/video/BV1CERYY3EjA/?p=20&share_source=copy_web&vd_source=1717a2b8baae523e9b5c9eb85a896dd3
 P19 讲解参数调参
+2. 参考原工程：https://github.com/jusway/RL_SuperMario
+   
+# 马里奥总结
+1. 创建多进程的环境，我们需要对环境进行预处理：跳帧、灰度化、降维，本质是为了减小训练量（cpu内存或者gpu显存，加快训练）
+2. 使用sb3库创建模型：ppo首先通过旧策略采集很多数据，然后我们分次每次训练batch个数据损失函数用于更新，更新n_epochs次。例如我们采集了很多帧包含马里奥从起点到穿过第一个水坑的过程，然后我们这次更新模型就是主要让模型在这个阶段可以穿过水坑。
+3. 让模型学习，并设置评估模型：例如我们更新了几次模型之后用当前模型去跑一下游戏，看看模型的表现。
+4. 保存模型，下次训练的时候可以直接调最佳模型的参数接着训练。
